@@ -146,14 +146,17 @@
     "volume_m3": 8.0,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 18400.0,
     "count_nos": null,
     "derived_quantity": 8.0,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "4.5.10",
     "classification_matched": "Concrete > Cement concrete",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 1840.0 kg CO₂e (ACC Cement concrete EPD; density from IS 456).",
+    "density_kg_m3": 2300.0,
+    "gwp_per_kg_co2e": 0.1,
+    "embodied_carbon_kg_co2e": 1840.0
   },
   {
     "gmap_id": "BOQ-7",
@@ -172,14 +175,17 @@
     "volume_m3": 7.3,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 16790.0,
     "count_nos": null,
     "derived_quantity": 7.3,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "4.6.11",
     "classification_matched": "Concrete > Cement concrete",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 1679.0 kg CO₂e (ACC Cement concrete EPD; density from IS 456).",
+    "density_kg_m3": 2300.0,
+    "gwp_per_kg_co2e": 0.1,
+    "embodied_carbon_kg_co2e": 1679.0
   },
   {
     "gmap_id": "BOQ-8",
@@ -198,14 +204,17 @@
     "volume_m3": 0.1,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 230.0,
     "count_nos": null,
     "derived_quantity": 0.1,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "4.11.1",
     "classification_matched": "Concrete > Cement concrete",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 23.0 kg CO₂e (ACC Cement concrete EPD; density from IS 456).",
+    "density_kg_m3": 2300.0,
+    "gwp_per_kg_co2e": 0.1,
+    "embodied_carbon_kg_co2e": 23.0
   },
   {
     "gmap_id": "BOQ-9",
@@ -221,17 +230,20 @@
     "mix_ratio": "1:2:4",
     "original_quantity": 14.4,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 0.576,
     "area_m2": 14.4,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 1324.8,
     "count_nos": null,
     "derived_quantity": 14.4,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "4.24",
     "classification_matched": "Concrete > Cement concrete DPC",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 132.48 kg CO₂e (ACC Cement concrete EPD; density from IS 456).",
+    "density_kg_m3": 2300.0,
+    "gwp_per_kg_co2e": 0.1,
+    "embodied_carbon_kg_co2e": 132.48
   },
   {
     "gmap_id": "BOQ-10",
@@ -276,14 +288,17 @@
     "volume_m3": 11.3,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 27120.0,
     "count_nos": null,
     "derived_quantity": 11.3,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "5.3",
     "classification_matched": "Concrete > Reinforced cement concrete",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 3254.4 kg CO₂e (ACC Cement concrete EPD; density from IS 456).",
+    "density_kg_m3": 2400.0,
+    "gwp_per_kg_co2e": 0.12,
+    "embodied_carbon_kg_co2e": 3254.4
   },
   {
     "gmap_id": "BOQ-12",
@@ -302,14 +317,17 @@
     "volume_m3": 1.0,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 2400.0,
     "count_nos": null,
     "derived_quantity": 1.0,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "5.4",
     "classification_matched": "Concrete > Reinforced cement concrete",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 288.0 kg CO₂e (ACC Cement concrete EPD; density from IS 456).",
+    "density_kg_m3": 2400.0,
+    "gwp_per_kg_co2e": 0.12,
+    "embodied_carbon_kg_co2e": 288.0
   },
   {
     "gmap_id": "BOQ-13",
@@ -328,14 +346,17 @@
     "volume_m3": 0.6,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 1440.0,
     "count_nos": null,
     "derived_quantity": 0.6,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "5.5",
     "classification_matched": "Concrete > Reinforced cement concrete",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 172.8 kg CO₂e (ACC Cement concrete EPD; density from IS 456).",
+    "density_kg_m3": 2400.0,
+    "gwp_per_kg_co2e": 0.12,
+    "embodied_carbon_kg_co2e": 172.8
   },
   {
     "gmap_id": "BOQ-14",
@@ -354,14 +375,17 @@
     "volume_m3": 1.7,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 4080.0,
     "count_nos": null,
     "derived_quantity": 1.7,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "5.6.3",
     "classification_matched": "Concrete > Reinforced cement concrete",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 489.6 kg CO₂e (ACC Cement concrete EPD; density from IS 456).",
+    "density_kg_m3": 2400.0,
+    "gwp_per_kg_co2e": 0.12,
+    "embodied_carbon_kg_co2e": 489.6
   },
   {
     "gmap_id": "BOQ-15",
@@ -380,14 +404,17 @@
     "volume_m3": 0.1,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 240.0,
     "count_nos": null,
     "derived_quantity": 0.1,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "5.7.3",
     "classification_matched": "Concrete > Reinforced cement concrete",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 28.8 kg CO₂e (ACC Cement concrete EPD; density from IS 456).",
+    "density_kg_m3": 2400.0,
+    "gwp_per_kg_co2e": 0.12,
+    "embodied_carbon_kg_co2e": 28.8
   },
   {
     "gmap_id": "BOQ-16",
@@ -458,14 +485,17 @@
     "volume_m3": 0.8,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 1920.0,
     "count_nos": null,
     "derived_quantity": 0.8,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "5.16",
     "classification_matched": "Concrete > Reinforced cement concrete",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 230.4 kg CO₂e (ACC Cement concrete EPD; density from IS 456).",
+    "density_kg_m3": 2400.0,
+    "gwp_per_kg_co2e": 0.12,
+    "embodied_carbon_kg_co2e": 230.4
   },
   {
     "gmap_id": "BOQ-19",
@@ -484,14 +514,17 @@
     "volume_m3": 17.0,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 32300.0,
     "count_nos": null,
     "derived_quantity": 17.0,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "6.1.14 / 6.5.4",
     "classification_matched": "Masonry > Burnt clay brick + cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 7752.0 kg CO₂e (Indian Brick Industry average EPD; density from SP 64).",
+    "density_kg_m3": 1900.0,
+    "gwp_per_kg_co2e": 0.24,
+    "embodied_carbon_kg_co2e": 7752.0
   },
   {
     "gmap_id": "BOQ-20",
@@ -510,14 +543,17 @@
     "volume_m3": 40.3,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 76570.0,
     "count_nos": null,
     "derived_quantity": 40.3,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "6.1.14 / 6.3.5",
     "classification_matched": "Masonry > Burnt clay brick + cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 18376.8 kg CO₂e (Indian Brick Industry average EPD; density from SP 64).",
+    "density_kg_m3": 1900.0,
+    "gwp_per_kg_co2e": 0.24,
+    "embodied_carbon_kg_co2e": 18376.8
   },
   {
     "gmap_id": "BOQ-21",
@@ -533,17 +569,20 @@
     "mix_ratio": "1:3",
     "original_quantity": 8.9,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 1.0235,
     "area_m2": 8.9,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 1944.65,
     "count_nos": null,
     "derived_quantity": 8.9,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "6.13 / 6.21.7",
     "classification_matched": "Masonry > Burnt clay brick + cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 466.72 kg CO₂e (Indian Brick Industry average EPD; density from SP 64).",
+    "density_kg_m3": 1900.0,
+    "gwp_per_kg_co2e": 0.24,
+    "embodied_carbon_kg_co2e": 466.72
   },
   {
     "gmap_id": "BOQ-22",
@@ -559,17 +598,20 @@
     "mix_ratio": "1:4",
     "original_quantity": 4.8,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 0.552,
     "area_m2": 4.8,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 1048.8,
     "count_nos": null,
     "derived_quantity": 4.8,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "6.18.4 / 6.21",
     "classification_matched": "Masonry > Burnt clay brick + cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 251.71 kg CO₂e (Indian Brick Industry average EPD; density from SP 64).",
+    "density_kg_m3": 1900.0,
+    "gwp_per_kg_co2e": 0.24,
+    "embodied_carbon_kg_co2e": 251.71
   },
   {
     "gmap_id": "BOQ-23",
@@ -585,17 +627,20 @@
     "mix_ratio": "1:4",
     "original_quantity": 18.0,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 2.07,
     "area_m2": 18.0,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 3933.0,
     "count_nos": null,
     "derived_quantity": 18.0,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "6.18.4 / 6.19",
     "classification_matched": "Masonry > Burnt clay brick + cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 943.92 kg CO₂e (Indian Brick Industry average EPD; density from SP 64).",
+    "density_kg_m3": 1900.0,
+    "gwp_per_kg_co2e": 0.24,
+    "embodied_carbon_kg_co2e": 943.92
   },
   {
     "gmap_id": "BOQ-24",
@@ -614,14 +659,17 @@
     "volume_m3": 0.0035,
     "area_m2": null,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 2.45,
     "count_nos": null,
     "derived_quantity": 0.0035,
     "derived_quantity_unit": "m³",
     "schedule": "DSR 1989",
     "schedule_item_code": "",
     "classification_matched": "Timber > Timber",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 0.86 kg CO₂e (Indian Forestry average EPD; density from IS 287).",
+    "density_kg_m3": 700.0,
+    "gwp_per_kg_co2e": 0.35,
+    "embodied_carbon_kg_co2e": 0.86
   },
   {
     "gmap_id": "BOQ-25",
@@ -647,7 +695,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "9.26.4",
     "classification_matched": "Timber > Timber door shutter",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 700.0,
+    "gwp_per_kg_co2e": 0.35
   },
   {
     "gmap_id": "BOQ-26",
@@ -699,7 +749,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "9.51",
     "classification_matched": "Timber > Teak wood",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 700.0,
+    "gwp_per_kg_co2e": 0.35
   },
   {
     "gmap_id": "BOQ-28",
@@ -725,7 +777,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "9.127.3",
     "classification_matched": "Metal > Oxidised mild steel",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 7850.0,
+    "gwp_per_kg_co2e": 1.85
   },
   {
     "gmap_id": "BOQ-29",
@@ -751,7 +805,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "9.218.1",
     "classification_matched": "Metal > Oxidised mild steel",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 7850.0,
+    "gwp_per_kg_co2e": 1.85
   },
   {
     "gmap_id": "BOQ-30",
@@ -777,7 +833,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "9.218.1",
     "classification_matched": "Metal > Aluminium",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 2700.0,
+    "gwp_per_kg_co2e": 8.2
   },
   {
     "gmap_id": "BOQ-31",
@@ -803,7 +861,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "9.219.3 / 9.219.5",
     "classification_matched": "Metal > Aluminium",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 2700.0,
+    "gwp_per_kg_co2e": 8.2
   },
   {
     "gmap_id": "BOQ-32",
@@ -829,7 +889,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "9.222.2 / 9.222.3",
     "classification_matched": "Metal > Aluminium",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 2700.0,
+    "gwp_per_kg_co2e": 8.2
   },
   {
     "gmap_id": "BOQ-33",
@@ -855,7 +917,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "9.223",
     "classification_matched": "Metal > Aluminium",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 2700.0,
+    "gwp_per_kg_co2e": 8.2
   },
   {
     "gmap_id": "BOQ-34",
@@ -871,7 +935,7 @@
     "mix_ratio": null,
     "original_quantity": 12.3,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 0.0615,
     "area_m2": 12.3,
     "length_m": null,
     "weight_kg": null,
@@ -907,7 +971,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "NSI",
     "classification_matched": "Metal > Oxidised mild steel",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 7850.0,
+    "gwp_per_kg_co2e": 1.85
   },
   {
     "gmap_id": "BOQ-36",
@@ -933,7 +999,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "9.224",
     "classification_matched": "Metal > Aluminium",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 2700.0,
+    "gwp_per_kg_co2e": 8.2
   },
   {
     "gmap_id": "BOQ-37",
@@ -959,7 +1027,10 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "NSI",
     "classification_matched": "Metal > Mild steel",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 122.1 kg CO₂e (Tata Steel India EPD; density from IS 808).",
+    "density_kg_m3": 7850.0,
+    "gwp_per_kg_co2e": 1.85,
+    "embodied_carbon_kg_co2e": 122.1
   },
   {
     "gmap_id": "BOQ-38",
@@ -985,7 +1056,10 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "10.14",
     "classification_matched": "Metal > Mild steel T-section",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 345.95 kg CO₂e (Tata Steel India EPD; density from IS 808).",
+    "density_kg_m3": 7850.0,
+    "gwp_per_kg_co2e": 1.85,
+    "embodied_carbon_kg_co2e": 345.95
   },
   {
     "gmap_id": "BOQ-39",
@@ -1011,7 +1085,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "10.19",
     "classification_matched": "Metal > Mild steel",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 7850.0,
+    "gwp_per_kg_co2e": 1.85
   },
   {
     "gmap_id": "BOQ-40",
@@ -1037,7 +1113,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "11.4.2",
     "classification_matched": "Concrete > Cement concrete",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 2300.0,
+    "gwp_per_kg_co2e": 0.1
   },
   {
     "gmap_id": "BOQ-41",
@@ -1053,17 +1131,20 @@
     "mix_ratio": "1:3",
     "original_quantity": 11.0,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 0.132,
     "area_m2": 11.0,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 264.0,
     "count_nos": null,
     "derived_quantity": 11.0,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "11.10.1",
     "classification_matched": "Plaster / Mortar > Cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 39.6 kg CO₂e (UltraTech Cement plaster EPD; density from IS 2250).",
+    "density_kg_m3": 2000.0,
+    "gwp_per_kg_co2e": 0.15,
+    "embodied_carbon_kg_co2e": 39.6
   },
   {
     "gmap_id": "BOQ-42",
@@ -1079,17 +1160,20 @@
     "mix_ratio": null,
     "original_quantity": 9.0,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 0.18,
     "area_m2": 9.0,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 360.0,
     "count_nos": null,
     "derived_quantity": 9.0,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "11.16.1",
     "classification_matched": "Stone / Composite > Marble chips + cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 54.0 kg CO₂e (UltraTech Cement plaster EPD; density from IS 2250).",
+    "density_kg_m3": 2000.0,
+    "gwp_per_kg_co2e": 0.15,
+    "embodied_carbon_kg_co2e": 54.0
   },
   {
     "gmap_id": "BOQ-43",
@@ -1157,7 +1241,7 @@
     "mix_ratio": null,
     "original_quantity": 65.0,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 6.5,
     "area_m2": 65.0,
     "length_m": null,
     "weight_kg": null,
@@ -1183,17 +1267,20 @@
     "mix_ratio": null,
     "original_quantity": 32.0,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 0.64,
     "area_m2": 32.0,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 1280.0,
     "count_nos": null,
     "derived_quantity": 32.0,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "NSI",
     "classification_matched": "Roofing / Masonry > Burnt clay tile + cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 192.0 kg CO₂e (UltraTech Cement plaster EPD; density from IS 2250).",
+    "density_kg_m3": 2000.0,
+    "gwp_per_kg_co2e": 0.15,
+    "embodied_carbon_kg_co2e": 192.0
   },
   {
     "gmap_id": "BOQ-47",
@@ -1219,7 +1306,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "NSI",
     "classification_matched": "Roofing / Masonry > Cement concrete + brick tile",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 2300.0,
+    "gwp_per_kg_co2e": 0.1
   },
   {
     "gmap_id": "BOQ-48",
@@ -1245,7 +1334,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "12.39",
     "classification_matched": "Composite > Cement concrete + PVC",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 2300.0,
+    "gwp_per_kg_co2e": 0.1
   },
   {
     "gmap_id": "BOQ-49",
@@ -1271,7 +1362,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "12.69.2",
     "classification_matched": "Metal > Cast iron",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 7200.0,
+    "gwp_per_kg_co2e": 2.1
   },
   {
     "gmap_id": "BOQ-50",
@@ -1297,7 +1390,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "12.71.2",
     "classification_matched": "Metal > Mild steel",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 7850.0,
+    "gwp_per_kg_co2e": 1.85
   },
   {
     "gmap_id": "BOQ-51",
@@ -1323,7 +1418,9 @@
     "schedule": "DSR 1989",
     "schedule_item_code": "12.72.2.2 / 12.72.3.2 / 12.72.1.2",
     "classification_matched": "Metal > Cast iron",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields.",
+    "density_kg_m3": 7200.0,
+    "gwp_per_kg_co2e": 2.1
   },
   {
     "gmap_id": "BOQ-52",
@@ -1339,17 +1436,20 @@
     "mix_ratio": "1:4",
     "original_quantity": 220.0,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 2.64,
     "area_m2": 220.0,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 5280.0,
     "count_nos": null,
     "derived_quantity": 220.0,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "13.8.4",
     "classification_matched": "Plaster / Mortar > Cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 792.0 kg CO₂e (UltraTech Cement plaster EPD; density from IS 2250).",
+    "density_kg_m3": 2000.0,
+    "gwp_per_kg_co2e": 0.15,
+    "embodied_carbon_kg_co2e": 792.0
   },
   {
     "gmap_id": "BOQ-53",
@@ -1365,17 +1465,20 @@
     "mix_ratio": "1:6",
     "original_quantity": 220.0,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 2.64,
     "area_m2": 220.0,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 5280.0,
     "count_nos": null,
     "derived_quantity": 220.0,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "13.9.4",
     "classification_matched": "Plaster / Mortar > Cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 792.0 kg CO₂e (UltraTech Cement plaster EPD; density from IS 2250).",
+    "density_kg_m3": 2000.0,
+    "gwp_per_kg_co2e": 0.15,
+    "embodied_carbon_kg_co2e": 792.0
   },
   {
     "gmap_id": "BOQ-54",
@@ -1391,17 +1494,20 @@
     "mix_ratio": "1:3",
     "original_quantity": 19.0,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 0.228,
     "area_m2": 19.0,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 456.0,
     "count_nos": null,
     "derived_quantity": 19.0,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "13.25",
     "classification_matched": "Plaster / Mortar > Cement mortar + lime wash",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 68.4 kg CO₂e (UltraTech Cement plaster EPD; density from IS 2250).",
+    "density_kg_m3": 2000.0,
+    "gwp_per_kg_co2e": 0.15,
+    "embodied_carbon_kg_co2e": 68.4
   },
   {
     "gmap_id": "BOQ-55",
@@ -1417,17 +1523,20 @@
     "mix_ratio": null,
     "original_quantity": 20.0,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 0.4,
     "area_m2": 20.0,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 800.0,
     "count_nos": null,
     "derived_quantity": 20.0,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "13.41",
     "classification_matched": "Stone / Composite > Marble chips + cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 120.0 kg CO₂e (UltraTech Cement plaster EPD; density from IS 2250).",
+    "density_kg_m3": 2000.0,
+    "gwp_per_kg_co2e": 0.15,
+    "embodied_carbon_kg_co2e": 120.0
   },
   {
     "gmap_id": "BOQ-56",
@@ -1443,17 +1552,20 @@
     "mix_ratio": "1:3",
     "original_quantity": 155.0,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 1.86,
     "area_m2": 155.0,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 3720.0,
     "count_nos": null,
     "derived_quantity": 155.0,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "5.31 / 13.24.1",
     "classification_matched": "Plaster / Mortar > Cement mortar",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 558.0 kg CO₂e (UltraTech Cement plaster EPD; density from IS 2250).",
+    "density_kg_m3": 2000.0,
+    "gwp_per_kg_co2e": 0.15,
+    "embodied_carbon_kg_co2e": 558.0
   },
   {
     "gmap_id": "BOQ-57",
@@ -1651,16 +1763,19 @@
     "mix_ratio": "1:3:6",
     "original_quantity": 34.5,
     "original_unit": "sqm",
-    "volume_m3": null,
+    "volume_m3": 2.5875,
     "area_m2": 34.5,
     "length_m": null,
-    "weight_kg": null,
+    "weight_kg": 5951.25,
     "count_nos": null,
     "derived_quantity": 34.5,
     "derived_quantity_unit": "m²",
     "schedule": "DSR 1989",
     "schedule_item_code": "16.1",
     "classification_matched": "Concrete / Masonry > Cement concrete + brick ballast",
-    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields."
+    "comment": "[OCR] Extracted from scanned BoQ; manual review applied to low-legibility fields. | [Carbon] EPD-backed estimate: 595.12 kg CO₂e (ACC Cement concrete EPD; density from IS 456).",
+    "density_kg_m3": 2300.0,
+    "gwp_per_kg_co2e": 0.1,
+    "embodied_carbon_kg_co2e": 595.12
   }
 ]

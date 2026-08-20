@@ -49,6 +49,9 @@ def export():
         "count_nos": ["count nos", "count (nos)"], "derived_quantity": ["derived quantity"],
         "derived_quantity_unit": ["derived quantity unit"], "schedule": ["schedule"],
         "schedule_item_code": ["schedule item code"], "classification_matched": ["classification matched"],
+        "density_kg_m3": ["density kg/m³", "density (kg/m3)", "density (kg/m³)", "density"],
+        "embodied_carbon_kg_co2e": ["embodied carbon a1-a3 kg co2e", "embodied carbon a1-a3 (kg co2e)", "embodied carbon a1-a3 (kg co₂e)", "embodied carbon"],
+        "gwp_per_kg_co2e": ["gwp / kg (kg co2e/kg)", "gwp / kg (kg co₂e/kg)", "gwp / kg", "gwp"],
         "comment": ["comment", "comments"],
     }
     for offset, item in enumerate(items, start=header_row + 1):
@@ -58,17 +61,47 @@ def export():
                 ws.cell(offset, col).value = item.get(key)
     wb.save(OUT / "passport_filled.xlsx")
 
-    counts = Counter(x["material_category"] for x in items)
-    labels, values = zip(*counts.most_common())
-    plt.figure(figsize=(10, 6))
-    plt.bar(labels, values)
-    plt.xticks(rotation=35, ha="right")
-    plt.ylabel("BoQ line items")
-    plt.title("CBRI Principal's Residence: Material Distribution")
+    # Aggregate data for side-by-side visualization
+    categories = sorted(list({x["material_category"] for x in items if x.get("material_category")}))
+    cat_counts = {cat: 0 for cat in categories}
+    cat_carbon = {cat: 0.0 for cat in categories}
+
+    for x in items:
+        cat = x.get("material_category") or "Other"
+        cat_counts[cat] = cat_counts.get(cat, 0) + 1
+        cat_carbon[cat] = cat_carbon.get(cat, 0.0) + float(x.get("embodied_carbon_kg_co2e") or 0.0)
+
+    # Sort data for clean plots
+    sorted_by_count = sorted(cat_counts.items(), key=lambda val: val[1], reverse=True)
+    labels_count, values_count = zip(*sorted_by_count)
+
+    sorted_by_carbon = sorted(cat_carbon.items(), key=lambda val: val[1], reverse=True)
+    labels_carbon, values_carbon = zip(*sorted_by_carbon)
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+
+    # Plot 1: Line Item Counts
+    ax1.bar(labels_count, values_count, color="#4F81BD")
+    ax1.set_ylabel("Number of BoQ Line Items", fontweight="bold")
+    ax1.set_title("Material Category Distribution (by Item Count)", fontweight="bold")
+    ax1.tick_params(axis='x', rotation=35)
+    for tick in ax1.get_xticklabels():
+        tick.set_ha("right")
+
+    # Plot 2: Embodied Carbon in kg CO2e
+    ax2.bar(labels_carbon, values_carbon, color="#C0504D")
+    ax2.set_ylabel("Embodied Carbon (kg CO₂e)", fontweight="bold")
+    ax2.set_title("Material Category Distribution (by Embodied Carbon)", fontweight="bold")
+    ax2.tick_params(axis='x', rotation=35)
+    for tick in ax2.get_xticklabels():
+        tick.set_ha("right")
+
+    plt.suptitle("CBRI Principal's Residence: Material & Carbon Passport Summary", fontsize=14, weight="bold")
     plt.tight_layout()
     plt.savefig(OUT / "visualization.png", dpi=200)
     plt.close()
     print("Outputs written to", OUT)
+
 
 
 if __name__ == "__main__":
