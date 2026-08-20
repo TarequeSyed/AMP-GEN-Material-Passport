@@ -65,4 +65,4 @@ python src/pipeline.py --ocr
 
 ## Estimation & Metrics
 * **Items Extracted**: 64 of 64 BoQ items.
-* **Hours Actually Spent**: 5.5 focused hours (including setup, OCR tuning, manual correction, EPD mapping, charting, and documentation).
+* **Hours Actually Spent**: 4.5 focused hours (including setup, OCR tuning, manual correction, EPD mapping, charting, and documentation).
