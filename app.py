@@ -343,8 +343,20 @@ button[kind="primary"] {
 BASELINE_DATA_PATH = Path("output/passport.json")
 BASELINE_META_PATH = Path("output/building_meta.json")
 
+# Load baseline CBRI data once and keep a permanent copy.
+# This ensures uploading a new BoQ never destroys the default dataset.
+if "baseline_df" not in st.session_state:
+    st.session_state.baseline_df = (
+        pd.read_json(BASELINE_DATA_PATH) if BASELINE_DATA_PATH.exists() else pd.DataFrame()
+    )
+
+# Active dataset — starts as baseline, replaced only when user runs pipeline
 if "df" not in st.session_state:
-    st.session_state.df = pd.read_json(BASELINE_DATA_PATH) if BASELINE_DATA_PATH.exists() else pd.DataFrame()
+    st.session_state.df = st.session_state.baseline_df.copy()
+
+# Track whether user has loaded a custom BoQ
+if "using_custom_boq" not in st.session_state:
+    st.session_state.using_custom_boq = False
 
 if "building_meta" not in st.session_state:
     if BASELINE_META_PATH.exists():
@@ -424,10 +436,23 @@ if mode == "Pre-reviewed CBRI Dataset":
             if log_files:
                 sel = st.selectbox("OCR Log File", [f.name for f in log_files], label_visibility="visible")
                 txt = (ocr_log_dir / sel).read_text(encoding="utf-8", errors="replace")
-                st.text_area("", txt[:2500] + ("…" if len(txt) > 2500 else ""), height=200, label_visibility="collapsed")
+                st.text_area("", txt[:2500] + ("\u2026" if len(txt) > 2500 else ""), height=200, label_visibility="collapsed")
 else:
     plinth_area = st.session_state.plinth_area_override
     st.sidebar.info("Upload a scanned BoQ PDF and Excel template in the last tab to run the pipeline.")
+
+# Reset button — visible whenever a custom BoQ is loaded
+if st.session_state.using_custom_boq:
+    st.sidebar.markdown("---")
+    st.sidebar.markdown(
+        '<div style="font-size:0.73rem;color:#64748b;margin-bottom:6px">'
+        'A custom BoQ is currently loaded.</div>',
+        unsafe_allow_html=True
+    )
+    if st.sidebar.button("Reset to CBRI Baseline", type="secondary"):
+        st.session_state.df = st.session_state.baseline_df.copy()
+        st.session_state.using_custom_boq = False
+        st.rerun()
 
 # ---------------------------------------------------------------------------
 # PAGE HEADER
