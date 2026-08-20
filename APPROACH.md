@@ -27,7 +27,8 @@ This document outlines the engineering decisions, tools, pipeline, and lessons l
 
 ## 3. Findings & Performance
 * **What Worked**: High-resolution rasterization and image filtering made faded parts of the dot-matrix print readable. Normalizing area-based items into volume using standard architectural thicknesses allowed us to calculate building-wide material masses.
-* **What Did Not**: OCR struggled with decimal points and schedule item codes (e.g. interpreting "0.60" as "o 60" or "0 60"). Purely automated parsing was not sufficient; the human-in-the-loop validation layer was critical to ensure database integrity.
+* **What Did Not**: OCR struggled with decimal points and schedule item codes (e.g. interpreting "0.60" as "o 60" or "0 60"). Purely automated parsing was not sufficient;
+Also, Tesseract's image_to_string ignores tabular columns. It reads text row-by-row or column-by-column, scrambling tabular structures.Hence, human-in-the-loop validation layer was critical to ensure database integrity.
 
 ## 4. With Two More Weeks
 * Implement layout-aware table OCR (like Table-Transformer or layout-parser) to automate tabular bounding-box extraction.
