@@ -994,6 +994,55 @@ if not st.session_state.df.empty:
   <span style="color:{path_col};font-weight:600">{path_note}</span>
 </div>""", unsafe_allow_html=True)
 
+        # ── LLM vs Rule-based Comparison Expander ──────────────────────
+        with st.expander("🔍 View LLM vs Rule-Based Method Comparison & Validation Report"):
+            st.markdown("""
+            This tool compares how the **Rule-Based Engine (Regex)** and **LLM Semantic Extractor**
+            classify line items in the active dataset. Disagreements highlight items where semantic context
+            differs from pattern matching.
+            """)
+            if not df_active.empty:
+                comparison_rows = []
+                match_count = 0
+                total_evaluated = 0
+
+                for _, r in df_active.head(25).iterrows():
+                    desc = str(r.get("description", ""))
+                    rule_cat = classify(desc, "Other")
+                    active_cat = str(r.get("material_category", "Other"))
+                    method = str(r.get("extraction_method", "Rule-based engine"))
+                    conf = str(r.get("material_confidence", "Rule-based"))
+
+                    agrees = (rule_cat.lower() == active_cat.lower())
+                    if agrees:
+                        match_count += 1
+                    total_evaluated += 1
+
+                    comparison_rows.append({
+                        "Item": r.get("boq_item_no", ""),
+                        "Description": desc[:70] + ("…" if len(desc) > 70 else ""),
+                        "Rule Engine Category": rule_cat,
+                        "Active Passport Category": active_cat,
+                        "Extraction Method": method,
+                        "Confidence": conf,
+                        "Agreement": "✅ Match" if agrees else "⚠️ Disagreement"
+                    })
+
+                comp_df = pd.DataFrame(comparison_rows)
+                acc_rate = (match_count / total_evaluated * 100) if total_evaluated > 0 else 100.0
+
+                m1, m2, m3 = st.columns(3)
+                with m1:
+                    st.metric("Sample Evaluated", f"{total_evaluated} items")
+                with m2:
+                    st.metric("Category Agreement", f"{acc_rate:.1f}%")
+                with m3:
+                    st.metric("Disagreements Flagged", f"{total_evaluated - match_count} items")
+
+                st.dataframe(comp_df, use_container_width=True, hide_index=True)
+            else:
+                st.info("No active dataset loaded for comparison.")
+
         # ── File uploaders ─────────────────────────────────────────────
         up_pdf      = st.file_uploader("Scanned BoQ PDF", type=["pdf"])
         up_template = st.file_uploader("Target Excel Template (.xlsx)", type=["xlsx"])
