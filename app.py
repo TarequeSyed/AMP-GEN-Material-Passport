@@ -18,7 +18,7 @@ from src.export_outputs import find_header_row
 # ---------------------------------------------------------------------------
 st.set_page_config(
     page_title="AMP-GEN Material Passport — Carbon Dashboard",
-    page_icon="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>",
+    page_icon="🌿",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -569,13 +569,13 @@ if not st.session_state.df.empty:
         st.markdown("**Export filtered data**")
         e1, e2, e3, _ = st.columns([1,1,1,3])
         with e1:
-            st.download_button(f"{icon('download')} CSV",  df_filtered.to_csv(index=False).encode("utf-8"), "passport_filtered.csv", "text/csv")
+            st.download_button("Download CSV",  df_filtered.to_csv(index=False).encode("utf-8"), "passport_filtered.csv", "text/csv")
         with e2:
-            st.download_button(f"{icon('download')} JSON", df_filtered.to_json(orient="records", indent=2).encode("utf-8"), "passport_filtered.json", "application/json")
+            st.download_button("Download JSON", df_filtered.to_json(orient="records", indent=2).encode("utf-8"), "passport_filtered.json", "application/json")
         with e3:
             if mode == "Pre-reviewed CBRI Dataset" and Path("output/passport_filled.xlsx").exists():
                 with open("output/passport_filled.xlsx","rb") as f:
-                    st.download_button(f"{icon('download')} Excel (.xlsx)", f, "passport_filled.xlsx",
+                    st.download_button("Download Excel (.xlsx)", f, "passport_filled.xlsx",
                                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
     # =================================================================
@@ -583,8 +583,12 @@ if not st.session_state.df.empty:
     # =================================================================
     with tab_charts:
 
-        # Aggregate
-        grp = df_active.groupby("material_category").agg(
+        # Aggregate — fill NaN with 0 before summing so no false zeros
+        df_agg = df_active.copy()
+        df_agg["embodied_carbon_kg_co2e"] = pd.to_numeric(df_agg["embodied_carbon_kg_co2e"], errors="coerce").fillna(0)
+        df_agg["weight_kg"]               = pd.to_numeric(df_agg["weight_kg"],               errors="coerce").fillna(0)
+        df_agg["volume_m3"]               = pd.to_numeric(df_agg["volume_m3"],               errors="coerce").fillna(0)
+        grp = df_agg.groupby("material_category").agg(
             Items=("boq_item_no","count"),
             Carbon=("embodied_carbon_kg_co2e","sum"),
             Mass_kg=("weight_kg","sum"),
@@ -597,28 +601,30 @@ if not st.session_state.df.empty:
 
         with col1:
             st.markdown('<p class="chart-title">Embodied Carbon by Material Category</p>', unsafe_allow_html=True)
-            st.markdown('<p class="chart-sub">Total kg CO\u2082e per material category, sorted by impact</p>', unsafe_allow_html=True)
+            st.markdown('<p class="chart-sub">Total kg CO\u2082e per material category, sorted by impact. Categories with no EPD data are excluded.</p>', unsafe_allow_html=True)
 
-            grp_s = grp.sort_values("Carbon")
+            # Only show categories with actual carbon data
+            grp_carbon = grp[grp["Carbon"] > 0].sort_values("Carbon")
             fig_hbar = go.Figure(go.Bar(
-                x=grp_s["Carbon"],
-                y=grp_s["material_category"],
+                x=grp_carbon["Carbon"],
+                y=grp_carbon["material_category"],
                 orientation="h",
                 marker=dict(
-                    color=grp_s["Carbon"],
-                    colorscale=[[0,"#dcfce7"],[0.5,"#4ade80"],[1,"#15803d"]],
+                    color=grp_carbon["Carbon"],
+                    colorscale=[[0,"#bbf7d0"],[0.5,"#4ade80"],[1,"#15803d"]],
                     showscale=False,
                     line=dict(width=0)
                 ),
-                text=[f"{v:,.0f}" for v in grp_s["Carbon"]],
+                text=[f"{v:,.0f}" for v in grp_carbon["Carbon"]],
                 textposition="outside",
                 textfont=dict(size=11, color="#334155"),
                 hovertemplate="<b>%{y}</b><br>Carbon: %{x:,.0f} kg CO\u2082e<extra></extra>"
             ))
             fig_hbar.update_layout(
                 **PLOTLY_LAYOUT,
-                height=340,
-                xaxis=dict(title="kg CO\u2082e", showgrid=True, gridcolor="#f1f5f9", zeroline=False),
+                height=360,
+                xaxis=dict(title="kg CO\u2082e", showgrid=True, gridcolor="#f1f5f9", zeroline=False,
+                           range=[0, grp_carbon["Carbon"].max() * 1.18]),
                 yaxis=dict(showgrid=False, tickfont=dict(size=11)),
             )
             st.plotly_chart(fig_hbar, use_container_width=True)
@@ -627,29 +633,26 @@ if not st.session_state.df.empty:
             st.markdown('<p class="chart-title">Carbon Share Distribution</p>', unsafe_allow_html=True)
             st.markdown('<p class="chart-sub">Proportional contribution of each material category</p>', unsafe_allow_html=True)
 
-            grp_pie = grp[grp["Carbon"] > 0].sort_values("Carbon", ascending=False)
+            grp_pie = grp[grp["Carbon"] > 0].sort_values("Carbon", ascending=False).reset_index(drop=True)
             fig_pie = go.Figure(go.Pie(
                 labels=grp_pie["material_category"],
-                values=grp_pie["Carbon"],
-                hole=0.5,
-                textinfo="percent",
-                textfont=dict(size=11),
+                values=grp_pie["Carbon"].round(1),
+                hole=0.52,
+                textinfo="label+percent",
+                textfont=dict(size=10),
+                insidetextorientation="radial",
                 marker=dict(colors=PALETTE, line=dict(color="#ffffff", width=2)),
                 hovertemplate="<b>%{label}</b><br>%{value:,.0f} kg CO\u2082e<br>%{percent}<extra></extra>",
-                sort=False,
+                sort=True,
             ))
             fig_pie.update_layout(
                 **PLOTLY_LAYOUT,
-                height=340,
-                showlegend=True,
-                legend=dict(
-                    orientation="v", x=1.02, y=0.5,
-                    font=dict(size=10), bgcolor="rgba(0,0,0,0)"
-                ),
+                height=360,
+                showlegend=False,
                 annotations=[dict(
-                    text=f"<b>{total_carbon/1000:,.1f}t</b><br>CO\u2082e",
+                    text=f"<b>{total_carbon/1000:,.1f} t</b><br><span style='font-size:11px'>CO\u2082e</span>",
                     x=0.5, y=0.5, showarrow=False, align="center",
-                    font=dict(size=13, color="#0f172a", family="DM Sans")
+                    font=dict(size=14, color="#0f172a", family="DM Sans")
                 )]
             )
             st.plotly_chart(fig_pie, use_container_width=True)
@@ -668,8 +671,8 @@ if not st.session_state.df.empty:
                 x=grp_cnt["material_category"],
                 y=grp_cnt["Items"],
                 marker=dict(
-                    color=grp_cnt["Items"],
-                    colorscale=[[0,"#dbeafe"],[0.5,"#60a5fa"],[1,"#1d4ed8"]],
+                    color=list(range(len(grp_cnt))),
+                    colorscale=[[0,"#1d4ed8"],[0.5,"#60a5fa"],[1,"#dbeafe"]],
                     showscale=False,
                     line=dict(width=0)
                 ),
@@ -680,36 +683,37 @@ if not st.session_state.df.empty:
             ))
             fig_vbar.update_layout(
                 **PLOTLY_LAYOUT,
-                height=320,
+                height=340,
                 xaxis=dict(tickangle=-30, showgrid=False),
-                yaxis=dict(title="Number of Items", showgrid=True, gridcolor="#f1f5f9", zeroline=False),
+                yaxis=dict(title="Number of Items", showgrid=True, gridcolor="#f1f5f9", zeroline=False,
+                           range=[0, grp_cnt["Items"].max() * 1.2]),
             )
             st.plotly_chart(fig_vbar, use_container_width=True)
 
         with col4:
             st.markdown('<p class="chart-title">Material Mass Distribution</p>', unsafe_allow_html=True)
-            st.markdown('<p class="chart-sub">Estimated mass (tonnes) by material category</p>', unsafe_allow_html=True)
+            st.markdown('<p class="chart-sub">Mass (tonnes) per category. Only categories with EPD-estimated mass shown.</p>', unsafe_allow_html=True)
 
-            grp_mass = grp[grp["Mass_t"] > 0].sort_values("Mass_t", ascending=False)
+            grp_mass = grp[grp["Mass_t"] > 0].sort_values("Mass_t", ascending=False).reset_index(drop=True)
             fig_mass_pie = go.Figure(go.Pie(
                 labels=grp_mass["material_category"],
-                values=grp_mass["Mass_t"],
-                hole=0.5,
-                textinfo="percent",
-                textfont=dict(size=11),
+                values=grp_mass["Mass_t"].round(2),
+                hole=0.52,
+                textinfo="label+percent",
+                textfont=dict(size=10),
+                insidetextorientation="radial",
                 marker=dict(colors=PALETTE, line=dict(color="#ffffff", width=2)),
                 hovertemplate="<b>%{label}</b><br>%{value:,.1f} tonnes<br>%{percent}<extra></extra>",
-                sort=False,
+                sort=True,
             ))
             fig_mass_pie.update_layout(
                 **PLOTLY_LAYOUT,
-                height=320,
-                showlegend=True,
-                legend=dict(orientation="v", x=1.02, y=0.5, font=dict(size=10), bgcolor="rgba(0,0,0,0)"),
+                height=340,
+                showlegend=False,
                 annotations=[dict(
-                    text=f"<b>{total_weight/1000:,.1f}t</b><br>Total",
+                    text=f"<b>{grp_mass['Mass_t'].sum():,.1f} t</b><br><span style='font-size:11px'>Total</span>",
                     x=0.5, y=0.5, showarrow=False, align="center",
-                    font=dict(size=13, color="#0f172a", family="DM Sans")
+                    font=dict(size=14, color="#0f172a", family="DM Sans")
                 )]
             )
             st.plotly_chart(fig_mass_pie, use_container_width=True)
@@ -724,7 +728,7 @@ if not st.session_state.df.empty:
             st.markdown('<p class="chart-sub">Stacked embodied carbon breakdown across building disciplines</p>', unsafe_allow_html=True)
 
             if "discipline" in df_active.columns:
-                dg = df_active.dropna(subset=["embodied_carbon_kg_co2e"]).groupby(
+                dg = df_agg[df_agg["embodied_carbon_kg_co2e"] > 0].groupby(
                     ["discipline","material_category"])["embodied_carbon_kg_co2e"].sum().reset_index()
                 fig_stk = px.bar(
                     dg, x="discipline", y="embodied_carbon_kg_co2e", color="material_category",
@@ -743,10 +747,10 @@ if not st.session_state.df.empty:
 
         with col6:
             st.markdown('<p class="chart-title">Mass vs Carbon — Scatter</p>', unsafe_allow_html=True)
-            st.markdown('<p class="chart-sub">Each point = one BoQ item. Size proportional to volume (m\u00b3)</p>', unsafe_allow_html=True)
+            st.markdown('<p class="chart-sub">Each point = one BoQ item with EPD data. Size proportional to volume (m\u00b3)</p>', unsafe_allow_html=True)
 
-            bdf = df_active.dropna(subset=["weight_kg","embodied_carbon_kg_co2e"]).copy()
-            bdf["vol_plot"] = bdf["volume_m3"].fillna(1).clip(lower=0.5)
+            bdf = df_agg[(df_agg["weight_kg"] > 0) & (df_agg["embodied_carbon_kg_co2e"] > 0)].copy()
+            bdf["vol_plot"] = bdf["volume_m3"].clip(lower=0.5)
             bdf["label"] = "Item " + bdf["boq_item_no"].astype(str)
             fig_sc = px.scatter(
                 bdf, x="weight_kg", y="embodied_carbon_kg_co2e",
@@ -773,15 +777,15 @@ if not st.session_state.df.empty:
         st.markdown('<p class="chart-title">Carbon Waterfall — Cumulative Buildup by Category</p>', unsafe_allow_html=True)
         st.markdown('<p class="chart-sub">How each material category contributes to the total embodied carbon</p>', unsafe_allow_html=True)
 
-        grp_wf = grp.sort_values("Carbon", ascending=False)
+        grp_wf = grp[grp["Carbon"] > 0].sort_values("Carbon", ascending=False)
         wf_x, wf_y, wf_m, wf_t = [], [], [], []
         for _, row in grp_wf.iterrows():
-            if row["Carbon"] > 0:
-                wf_x.append(row["material_category"])
-                wf_y.append(row["Carbon"])
-                wf_m.append("relative")
-                wf_t.append(f"{row['Carbon']:,.0f}")
-        wf_x.append("TOTAL"); wf_y.append(total_carbon); wf_m.append("total"); wf_t.append(f"{total_carbon:,.0f}")
+            wf_x.append(row["material_category"])
+            wf_y.append(row["Carbon"])
+            wf_m.append("relative")
+            wf_t.append(f"{row['Carbon']:,.0f}")
+        total_c_epd = grp_wf["Carbon"].sum()
+        wf_x.append("TOTAL"); wf_y.append(total_c_epd); wf_m.append("total"); wf_t.append(f"{total_c_epd:,.0f}")
 
         fig_wf = go.Figure(go.Waterfall(
             orientation="v", measure=wf_m, x=wf_x, y=wf_y, text=wf_t,
