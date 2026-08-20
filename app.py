@@ -915,18 +915,86 @@ if not st.session_state.df.empty:
         st.dataframe(grp2, use_container_width=True, hide_index=True)
 
     # =================================================================
-    # TAB 4 — UPLOAD & PROCESS
+    # TAB 4 — UPLOAD & PROCESS  (with optional LLM-enhanced extraction)
     # =================================================================
     with tab_upload:
+        from src.llm_extractor import (
+            build_pipeline_status, classify_with_confidence, DEFAULT_MODEL
+        )
+
+        # ── LLM status badge ──────────────────────────────────────────
+        llm_status = build_pipeline_status()
+        badge_bg   = llm_status["status_color"]
+        badge_txt  = llm_status["status_label"]
         st.markdown(f"""
         <div class="section-card">
-          <div class="section-title">{icon("upload")} Process a New Bill of Quantities Scan</div>
-          <div class="section-subtitle">
-            Upload any scanned BoQ PDF to run the complete pipeline:
-            rasterise &rarr; OCR &rarr; normalise &rarr; carbon estimation &rarr; Excel export.
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <div style="flex:1">
+              <div class="section-title">{icon("upload")} Process a New Bill of Quantities Scan</div>
+              <div class="section-subtitle">
+                Upload any scanned BoQ PDF to run the complete pipeline:
+                rasterise &rarr; OCR &rarr; (LLM / rule-based) classification
+                &rarr; carbon estimation &rarr; Excel export.
+              </div>
+            </div>
+            <div style="flex-shrink:0;text-align:right">
+              <div style="display:inline-flex;align-items:center;gap:7px;
+                          background:#f8fafc;border:1px solid #e2e8f0;
+                          border-radius:8px;padding:7px 13px;font-size:0.74rem;color:#475569">
+                <span style="width:8px;height:8px;border-radius:50%;
+                             background:{badge_bg};display:inline-block;flex-shrink:0"></span>
+                {badge_txt}
+              </div>
+            </div>
           </div>
         </div>""", unsafe_allow_html=True)
 
+        # ── LLM toggle ────────────────────────────────────────────────
+        use_llm = st.toggle(
+            "Use LLM-Enhanced Extraction  (requires Ollama running locally)",
+            value=False,
+            help=(
+                "When ON: each item is first sent to the local Ollama LLM for semantic "
+                "classification. High-confidence results are used directly; "
+                "low-confidence or failed calls fall back to the regex engine automatically. "
+                "When OFF: only the rule-based engine runs (same as before)."
+            )
+        )
+
+        # ── Pipeline architecture diagram ─────────────────────────────
+        if use_llm:
+            ollama_ok = llm_status["ollama_available"] and llm_status["model_ready"]
+            if ollama_ok:
+                path_note = "LLM path ACTIVE — Ollama is running and model is ready."
+                path_col  = "#16a34a"
+            else:
+                path_note = "Ollama offline — pipeline will use rule-based fallback for all items."
+                path_col  = "#d97706"
+
+            st.markdown(f"""
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;
+            padding:16px 20px;margin:8px 0 16px;font-size:0.8rem;line-height:2;
+            font-family:'Inter',sans-serif;color:#475569">
+  <span style="font-weight:600;color:#0f172a;font-size:0.82rem">Pipeline flow (LLM mode)</span><br>
+  <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">Scanned PDF</code>
+  &rarr; <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">Image Preprocessing</code>
+  &rarr; <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">Tesseract OCR</code>
+  &rarr; <code style="background:#dcfce7;padding:2px 6px;border-radius:4px;color:#15803d">
+    Local LLM (Ollama &middot; {DEFAULT_MODEL})</code><br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &darr; Confidence check<br>
+  &nbsp;&nbsp;&nbsp;
+  <span style="color:#16a34a;font-weight:600">High/Medium</span> &rarr; LLM output used &nbsp;&nbsp;
+  <span style="color:#d97706;font-weight:600">Low/Offline</span> &rarr; Rule-based engine<br>
+  &rarr; <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">EPD Carbon Calculation</code>
+  &rarr; <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">Material Passport</code>
+  <br><br>
+  <span style="color:{path_col};font-weight:600">{path_note}</span>
+</div>""", unsafe_allow_html=True)
+
+        # ── File uploaders ─────────────────────────────────────────────
         up_pdf      = st.file_uploader("Scanned BoQ PDF", type=["pdf"])
         up_template = st.file_uploader("Target Excel Template (.xlsx)", type=["xlsx"])
 
@@ -937,6 +1005,7 @@ if not st.session_state.df.empty:
                 progress_bar = st.progress(0)
                 status_text  = st.empty()
                 try:
+                    # -- Step 1: OCR --
                     status_text.text("Step 1 / 4 — Rasterising PDF and running OCR…")
                     progress_bar.progress(10)
                     pdf_bytes = up_pdf.read()
@@ -950,9 +1019,10 @@ if not st.session_state.df.empty:
                         progress_bar.progress(int(10 + (idx / len(doc)) * 40))
 
                     combined_ocr_text = "\n\n".join(raw_ocr_pages)
-                    status_text.text("Step 2 / 4 — Parsing and normalising quantities…")
-                    progress_bar.progress(60)
 
+                    # -- Step 2: Parse line items --
+                    status_text.text("Step 2 / 4 — Parsing quantities from OCR text…")
+                    progress_bar.progress(60)
                     lines = combined_ocr_text.split("\n")
                     extracted_items, item_count, current_desc = [], 1, []
                     for line in lines:
@@ -982,16 +1052,46 @@ if not st.session_state.df.empty:
                             {"boq_item_no":"4","gmap_id":"BOQ-4","description":"Mild steel reinforcement bars","original_quantity":1200.0,"original_unit":"kg"},
                         ]
 
-                    status_text.text("Step 3 / 4 — Estimating carbon & mass…")
+                    # -- Step 3: Classify + carbon (LLM or rule-based) --
+                    step3_label = (
+                        "Step 3 / 4 — LLM semantic classification + carbon estimation…"
+                        if use_llm else
+                        "Step 3 / 4 — Rule-based classification + carbon estimation…"
+                    )
+                    status_text.text(step3_label)
                     progress_bar.progress(80)
+
                     normalized_items = []
+                    llm_count, rule_count = 0, 0
+
                     for item in extracted_items:
-                        item["material_category"] = classify(item["description"], "Concrete")
+                        desc = item["description"]
+
+                        if use_llm:
+                            # LLM path with confidence-based fallback
+                            result = classify_with_confidence(desc, classify)
+                            item["material_category"]  = result["material_category"]
+                            item["material_product"]   = result.get("material_product", "")
+                            item["material_confidence"]= result["confidence"]
+                            item["extraction_method"]  = result["extraction_method"]
+                            item["llm_reasoning"]      = result.get("reasoning", "")
+                            if "LLM" in result["extraction_method"]:
+                                llm_count += 1
+                            else:
+                                rule_count += 1
+                        else:
+                            # Original rule-based path — unchanged
+                            item["material_category"]  = classify(desc, "Concrete")
+                            item["material_confidence"]= "Rule-based"
+                            item["extraction_method"]  = "Rule-based engine"
+                            rule_count += 1
+
+                        # EPD carbon calculation (same for both paths)
                         unit = item["original_unit"]; q = item["original_quantity"]
                         item["volume_m3"] = q if unit in {"cum","m3"} else None
                         item["weight_kg"] = q if unit == "kg" else None
                         item["area_m2"]   = q if unit == "sqm" else None
-                        matched_key = next((k for k in MATERIAL_EPD_REGISTRY if k in item["description"].lower()), None)
+                        matched_key = next((k for k in MATERIAL_EPD_REGISTRY if k in desc.lower()), None)
                         if matched_key:
                             data = MATERIAL_EPD_REGISTRY[matched_key]
                             item["density_kg_m3"] = data["density"]; item["gwp_per_kg_co2e"] = data["gwp"]
@@ -1002,10 +1102,23 @@ if not st.session_state.df.empty:
                             item["comment"] = f"EPD: {data['ref']}"
                         else:
                             item["density_kg_m3"] = item["gwp_per_kg_co2e"] = None
-                            item["embodied_carbon_kg_co2e"] = 0.0; item["comment"] = "Classification fallback."
+                            item["embodied_carbon_kg_co2e"] = 0.0
+                            item["comment"] = "Classification fallback — no EPD match."
                         normalized_items.append(item)
-                    st.session_state.df = pd.DataFrame(normalized_items)
 
+                    # Show extraction method summary if LLM mode was used
+                    if use_llm and (llm_count + rule_count) > 0:
+                        total_cl = llm_count + rule_count
+                        st.info(
+                            f"Classification summary — "
+                            f"LLM: **{llm_count}/{total_cl}** items  |  "
+                            f"Rule-based fallback: **{rule_count}/{total_cl}** items"
+                        )
+
+                    st.session_state.df = pd.DataFrame(normalized_items)
+                    st.session_state.using_custom_boq = True
+
+                    # -- Step 4: Excel export --
                     status_text.text("Step 4 / 4 — Populating Excel template…")
                     progress_bar.progress(95)
                     wb = openpyxl.load_workbook(io.BytesIO(up_template.read()))
@@ -1029,7 +1142,7 @@ if not st.session_state.df.empty:
                     st.session_state.custom_excel = out_buf.getvalue()
                     progress_bar.progress(100)
                     status_text.text("Pipeline complete. Explore the updated data in the tabs above.")
-                    st.success(f"Successfully extracted {len(normalized_items)} items from the uploaded BoQ PDF.")
+                    st.success(f"Extracted {len(normalized_items)} items. Use the 'Reset to CBRI Baseline' button in the sidebar to restore the default dataset.")
                     st.rerun()
                 except Exception as e:
                     st.error(f"Pipeline error: {e}")
